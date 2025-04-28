@@ -22,6 +22,7 @@ function Home() {
   const [selectedSubject, setSelectedSubject] = useState("");
   const today = new Date().toISOString().split("T")[0];
   const [loading, setLoading] = useState(false);
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedInUser");
@@ -38,7 +39,7 @@ function Home() {
     const fetchStudents = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/students/course/${selectedCourse}/year/${selectedYear}`
+          `${BASE_URL}/api/students/course/${selectedCourse}/year/${selectedYear}`
         );
 
         if (Array.isArray(data)) {
@@ -338,7 +339,7 @@ function Home() {
     setTimeout(() => setProgress(100), 400);
     handleSuccess("LogOut Successfully");
     setTimeout(() => {
-      navigate("/login");
+      navigate(`/login`);
     }, 1000);
   };
 
@@ -366,7 +367,7 @@ function Home() {
     } else {
       try {
         setLoading(true);
-        await axios.post("http://localhost:5000/api/attendance/mark", {
+        await axios.post(`${BASE_URL}/api/attendance/mark`, {
           attendanceData: attendance,
           date: date,
           subject: selectedSubject,
@@ -385,14 +386,14 @@ function Home() {
     setProgress(30);
     setTimeout(() => setProgress(60), 300);
     setTimeout(() => setProgress(100), 600);
-    setTimeout(() => navigate("/history"), 900);
+    setTimeout(() => navigate(`${BASE_URL}/history`), 900);
   };
 
   const handleAttendance = () => {
     setProgress(30);
     setTimeout(() => setProgress(60), 300);
     setTimeout(() => setProgress(100), 600);
-    setTimeout(() => navigate("/home"), 900);
+    setTimeout(() => navigate(`/home`), 900);
   };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-800 to-black text-white p-6">
