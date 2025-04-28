@@ -15,6 +15,7 @@ function AttendanceHistory() {
   const [loggedInUser, setLoggedInUser] = useState("");
   const [attendanceData, setAttendanceData] = useState([]);
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleLogout = (e) => {
     localStorage.removeItem("token");
@@ -36,7 +37,7 @@ function AttendanceHistory() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/attendance/records")
+      .get(`${BASE_URL}/api/attendance/records`)
       .then((response) => {
         setAttendanceData(response.data);
       })

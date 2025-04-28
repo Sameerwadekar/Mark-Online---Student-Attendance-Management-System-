@@ -29,6 +29,7 @@ function CreateStudent() {
   const [selectedYear, setSelectedYear] = useState("");
   const [showFilter, setShowFilter] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     fetchStudents();
@@ -36,7 +37,7 @@ function CreateStudent() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/students");
+      const response = await fetch(`${BASE_URL}/api/students`);
       if (!response.ok) throw new handleError("Failed to fetch students");
 
       const data = await response.json();

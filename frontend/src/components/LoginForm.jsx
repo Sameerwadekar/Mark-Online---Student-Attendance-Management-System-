@@ -10,6 +10,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSignupClick = () => {
     setProgress(30);
@@ -50,7 +51,7 @@ function LoginForm() {
       return;
     } else {
       try {
-        const response = await fetch("http://localhost:5000/auth/login", {
+        const response = await fetch(`${BASE_URL}/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(LoginInfo),
