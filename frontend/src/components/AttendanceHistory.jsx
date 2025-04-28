@@ -22,7 +22,7 @@ function AttendanceHistory() {
     localStorage.removeItem("loggedInUser");
     handleSuccess("LogOut Successfully");
     setTimeout(() => {
-      navigate("/login");
+      navigate(`${BASE_URL}/login`);
     }, 1000);
   };
 

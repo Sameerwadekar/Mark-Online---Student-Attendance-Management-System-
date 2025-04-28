@@ -31,6 +31,7 @@ function LoginForm() {
 
   const Handlelogin = async (e) => {
     e.preventDefault();
+    console.log("Base URL is:", BASE_URL);
     const { email, password } = LoginInfo;
 
     if (!email || !password) {
