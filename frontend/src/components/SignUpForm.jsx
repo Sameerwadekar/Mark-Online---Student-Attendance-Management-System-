@@ -15,6 +15,7 @@ function LoginForm() {
     email: "",
     password: "",
   });
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ function LoginForm() {
     setProgress(30);
     setTimeout(() => setProgress(60), 300);
     setTimeout(() => setProgress(100), 600);
-    setTimeout(() => navigate("/login"), 700);
+    setTimeout(() => navigate("/login"), 700); // ONLY "/login"
   };
 
   const HandleSubmit = async (e) => {
@@ -41,7 +42,7 @@ function LoginForm() {
 
     try {
       setProgress(30);
-      const url = "http://localhost:5000/auth/signup";
+      const url = `${BASE_URL}/auth/signup`; // <-- backticks added ✅
 
       const response = await fetch(url, {
         method: "POST",
@@ -64,7 +65,7 @@ function LoginForm() {
       if (success) {
         handleSuccess(message || "Signup successful!");
         setTimeout(() => {
-          navigate("/login");
+          navigate("/login"); // <-- not BASE_URL
         }, 1000);
         setProgress(100);
       } else {
